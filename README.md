@@ -119,6 +119,27 @@ python query_test.py
 
 Interactive CLI to test querying the knowledge base.
 
+### Ask Questions — Full RAG (Phase 3)
+
+```bash
+# Using Ollama (default, local)
+python run_rag.py --model llama3
+
+# Using a different provider
+python run_rag.py --model llama4 --base-url http://localhost:11434/v1
+
+# Check pipeline health
+python run_rag.py --status
+```
+
+Requires an LLM server running locally (Ollama, vLLM, or LM Studio) or a remote OpenAI-compatible API. See `config/llm_profiles.py` for pre-configured profiles.
+
+**Supported LLM providers:**
+- [Ollama](https://ollama.com) — `ollama serve` then `ollama pull llama3`
+- [vLLM](https://vllm.ai) — for GPU-accelerated inference
+- [LM Studio](https://lmstudio.ai) — GUI-based local inference
+- Any OpenAI-compatible API (Together AI, Groq, etc.)
+
 ### Run Tests
 
 ```bash
@@ -129,7 +150,7 @@ python -m pytest tests/ -v
 
 - [x] **Phase 1** — Document ingestion pipeline (parsers for PDF, CSV, MD, SQL, TXT + chunking)
 - [x] **Phase 2** — Vector store (ChromaDB + sentence-transformer embeddings)
-- [ ] **Phase 3** — Retrieval + answer generation (GPT-OSS)
+- [x] **Phase 3** — Retrieval + answer generation (OpenAI-compatible LLMs)
 - [ ] **Phase 4** — Vision pipeline (Llama 4 image processing)
 - [ ] **Phase 5** — Orchestrator (Mistral/Kimi K2 monitoring)
 - [ ] **Phase 6** — FastAPI endpoints + deployment

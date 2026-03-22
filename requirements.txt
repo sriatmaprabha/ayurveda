@@ -5,9 +5,8 @@ pymupdf>=1.24.0
 sentence-transformers>=3.0.0
 chromadb>=1.0.0
 
-# LLM clients (Phase 3)
-# openai>=1.0.0
-# transformers>=4.40.0
+# LLM client (OpenAI-compatible APIs)
+httpx>=0.27.0
 
 # API (Phase 6)
 # fastapi>=0.111.0
