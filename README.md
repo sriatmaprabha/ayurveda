@@ -158,6 +158,38 @@ python run_vision.py --status
 
 Requires a vision-capable model (Llama 4, LLaVA, etc.) via Ollama or compatible API.
 
+### Run API Server (Phase 6)
+
+```bash
+# Start the server
+python run_server.py
+
+# With auto-reload for development
+python run_server.py --reload --port 8000
+```
+
+API docs available at `http://localhost:8000/docs` (Swagger UI).
+
+**API Endpoints:**
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/query` | Ask an Ayurveda question |
+| POST | `/vision/query` | Ask about an uploaded image |
+| POST | `/ingest/image` | Add an image to the knowledge base |
+| GET | `/status` | Check pipeline component health |
+| GET | `/stats` | View query performance metrics |
+
+**Environment variables** for configuration:
+
+```bash
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_MODEL=llama3
+VISION_MODEL=llama4
+MONITOR_MODEL=mistral
+ENABLE_MONITORING=true
+```
+
 ### Run Tests
 
 ```bash
@@ -170,8 +202,8 @@ python -m pytest tests/ -v
 - [x] **Phase 2** — Vector store (ChromaDB + sentence-transformer embeddings)
 - [x] **Phase 3** — Retrieval + answer generation (OpenAI-compatible LLMs)
 - [x] **Phase 4** — Vision pipeline (Llama 4 image processing)
-- [ ] **Phase 5** — Orchestrator (Mistral/Kimi K2 monitoring)
-- [ ] **Phase 6** — FastAPI endpoints + deployment
+- [x] **Phase 5** — Orchestrator monitoring (Mistral/Kimi K2 quality evaluation + logging)
+- [x] **Phase 6** — FastAPI REST API with Swagger docs
 
 ## License
 
