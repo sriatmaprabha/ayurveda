@@ -81,8 +81,8 @@ Ayurveda/
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/ayurveda-rag.git
-cd ayurveda-rag
+git clone https://github.com/sriatmaprabha/ayurveda.git
+cd ayurveda
 
 # Create virtual environment
 python -m venv venv
@@ -103,6 +103,22 @@ python run_ingestion.py
 
 This parses all documents in `knowledge_base/`, `insert_asanas.sql`, and `asana_recommendations.csv`, then saves processed chunks to `data/processed/chunks.jsonl`.
 
+### Build Vector Store (Phase 2)
+
+```bash
+python build_vector_store.py
+```
+
+Embeds all chunks and stores them in ChromaDB at `data/vector_store/`.
+
+### Test Retrieval (Phase 2)
+
+```bash
+python query_test.py
+```
+
+Interactive CLI to test querying the knowledge base.
+
 ### Run Tests
 
 ```bash
@@ -112,7 +128,7 @@ python -m pytest tests/ -v
 ## Roadmap
 
 - [x] **Phase 1** — Document ingestion pipeline (parsers for PDF, CSV, MD, SQL, TXT + chunking)
-- [ ] **Phase 2** — Vector store (ChromaDB + sentence-transformer embeddings)
+- [x] **Phase 2** — Vector store (ChromaDB + sentence-transformer embeddings)
 - [ ] **Phase 3** — Retrieval + answer generation (GPT-OSS)
 - [ ] **Phase 4** — Vision pipeline (Llama 4 image processing)
 - [ ] **Phase 5** — Orchestrator (Mistral/Kimi K2 monitoring)
