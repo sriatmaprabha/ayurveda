@@ -140,6 +140,24 @@ Requires an LLM server running locally (Ollama, vLLM, or LM Studio) or a remote 
 - [LM Studio](https://lmstudio.ai) — GUI-based local inference
 - Any OpenAI-compatible API (Together AI, Groq, etc.)
 
+### Image Processing — Vision RAG (Phase 4)
+
+```bash
+# Ask about an image (herb photo, book scan, yoga diagram)
+python run_vision.py path/to/image.jpg -q "What herb is this?"
+
+# Ingest an image into the knowledge base
+python run_vision.py path/to/scan.png --ingest
+
+# Ingest all images from a directory
+python run_vision.py --ingest-dir path/to/scans/
+
+# Check vision pipeline status
+python run_vision.py --status
+```
+
+Requires a vision-capable model (Llama 4, LLaVA, etc.) via Ollama or compatible API.
+
 ### Run Tests
 
 ```bash
@@ -151,7 +169,7 @@ python -m pytest tests/ -v
 - [x] **Phase 1** — Document ingestion pipeline (parsers for PDF, CSV, MD, SQL, TXT + chunking)
 - [x] **Phase 2** — Vector store (ChromaDB + sentence-transformer embeddings)
 - [x] **Phase 3** — Retrieval + answer generation (OpenAI-compatible LLMs)
-- [ ] **Phase 4** — Vision pipeline (Llama 4 image processing)
+- [x] **Phase 4** — Vision pipeline (Llama 4 image processing)
 - [ ] **Phase 5** — Orchestrator (Mistral/Kimi K2 monitoring)
 - [ ] **Phase 6** — FastAPI endpoints + deployment
 
