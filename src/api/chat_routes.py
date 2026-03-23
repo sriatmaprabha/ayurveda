@@ -5,9 +5,11 @@ import uuid
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from src.generation import LLMConfig, LLMClient, ConversationalDiagnostic, DiagnosticConversation
+from src.generation.prompts import DIAGNOSTIC_SYSTEM_PROMPT, DIAGNOSTIC_QUERY_TEMPLATE
 from src.embeddings import VectorStore
 from src.retrieval import QueryEngine
 
@@ -145,6 +147,76 @@ async def send_message(request: ChatRequest):
         dominant_dosha=conversation.dominant_dosha,
         turn_number=turn_number,
         sources=sources,
+    )
+
+
+@router.post("/stream")
+async def stream_message(request: ChatRequest):
+    """Stream a diagnostic response token-by-token. Much faster perceived response time."""
+    if request.session_id not in _sessions:
+        raise HTTPException(status_code=404, detail="Session not found. Start with POST /chat/start")
+
+    session = _sessions[request.session_id]
+    conversation: DiagnosticConversation = session["conversation"]
+    engine = _get_query_engine()
+
+    # Retrieve context
+    context = ""
+    try:
+        retrieval = engine.answer_with_sources(request.message, top_k=3)
+        context = retrieval["context"]
+    except Exception:
+        context = ""
+
+    conversation.add_patient_message(request.message)
+
+    # Build the prompt
+    prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
+        context=context if context else "No specific context retrieved.",
+        conversation_history=conversation.history_text,
+        message=request.message,
+        vata_score=conversation.vata_score,
+        pitta_score=conversation.pitta_score,
+        kapha_score=conversation.kapha_score,
+        dominant_dosha=conversation.dominant_dosha,
+        level=conversation.level,
+    )
+
+    config = LLMConfig(
+        base_url=os.getenv("LLM_BASE_URL", "http://localhost:11434/v1"),
+        model=os.getenv("LLM_MODEL", "llama3"),
+        api_key=os.getenv("LLM_API_KEY", "ollama"),
+        max_tokens=512,
+    )
+    client = LLMClient(config)
+
+    def token_generator():
+        full_response = ""
+        try:
+            for token in client.generate_stream(
+                prompt=prompt,
+                system_prompt=DIAGNOSTIC_SYSTEM_PROMPT,
+            ):
+                full_response += token
+                yield token
+        except ConnectionError as e:
+            yield f"\n\n[Error: {e}]"
+        finally:
+            # Save the full response to conversation history
+            if full_response:
+                # Ensure it ends with a question
+                diagnostic = _get_diagnostic()
+                checked = diagnostic._ensure_ends_with_question(full_response)
+                if checked != full_response:
+                    extra = checked[len(full_response):]
+                    yield extra
+                    full_response = checked
+                conversation.add_vaidya_response(full_response)
+
+    return StreamingResponse(
+        token_generator(),
+        media_type="text/plain",
+        headers={"X-Session-Id": request.session_id},
     )
 
 

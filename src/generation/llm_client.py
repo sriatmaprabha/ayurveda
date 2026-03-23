@@ -2,6 +2,7 @@
 
 import json
 import logging
+from collections.abc import Generator
 from dataclasses import dataclass, field
 
 import httpx
@@ -16,8 +17,8 @@ class LLMConfig:
     model: str = "llama3"
     api_key: str = "ollama"  # Ollama doesn't need a real key
     temperature: float = 0.3
-    max_tokens: int = 1024
-    timeout: float = 120.0
+    max_tokens: int = 512  # Reduced from 1024 — faster responses
+    timeout: float = 180.0
     extra_params: dict = field(default_factory=dict)
 
 
@@ -85,6 +86,66 @@ class LLMClient:
         except Exception as e:
             logger.error(f"LLM request failed: {e}")
             raise
+
+    def stream(
+        self,
+        messages: list[dict],
+        temperature: float | None = None,
+        max_tokens: int | None = None,
+    ) -> Generator[str, None, None]:
+        """Stream a chat completion response token by token."""
+        url = f"{self.config.base_url}/chat/completions"
+
+        payload = {
+            "model": self.config.model,
+            "messages": messages,
+            "temperature": temperature or self.config.temperature,
+            "max_tokens": max_tokens or self.config.max_tokens,
+            "stream": True,
+            **self.config.extra_params,
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.config.api_key}",
+        }
+
+        try:
+            with self._client.stream("POST", url, json=payload, headers=headers) as response:
+                response.raise_for_status()
+                for line in response.iter_lines():
+                    if not line or not line.startswith("data: "):
+                        continue
+                    data_str = line[6:]  # strip "data: "
+                    if data_str.strip() == "[DONE]":
+                        break
+                    try:
+                        chunk = json.loads(data_str)
+                        delta = chunk["choices"][0].get("delta", {})
+                        token = delta.get("content", "")
+                        if token:
+                            yield token
+                    except (json.JSONDecodeError, KeyError, IndexError):
+                        continue
+        except httpx.ConnectError:
+            raise ConnectionError(
+                f"LLM server not reachable at {self.config.base_url}. "
+                "Start your LLM server first."
+            )
+
+    def generate_stream(
+        self,
+        prompt: str,
+        system_prompt: str = "",
+        temperature: float | None = None,
+        max_tokens: int | None = None,
+    ) -> Generator[str, None, None]:
+        """Stream a generation response token by token."""
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        yield from self.stream(messages, temperature, max_tokens)
 
     def is_available(self) -> bool:
         """Check if the LLM server is reachable."""

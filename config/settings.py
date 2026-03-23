@@ -34,5 +34,5 @@ LLM_CONFIG = {
 }
 
 # Retrieval
-TOP_K_RESULTS = 5         # number of chunks to retrieve per query
+TOP_K_RESULTS = 3         # number of chunks to retrieve per query (reduced for speed)
 SIMILARITY_THRESHOLD = 0.3

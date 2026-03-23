@@ -44,7 +44,12 @@ class QueryEngine:
                 header += f" — {section}"
             header += f" (relevance: {score:.2f})]"
 
-            context_parts.append(f"{header}\n{r['text']}")
+            # Trim each chunk to max 300 words to reduce LLM input size
+            text = r["text"]
+            words = text.split()
+            if len(words) > 300:
+                text = " ".join(words[:300]) + "..."
+            context_parts.append(f"{header}\n{text}")
 
         return "\n\n---\n\n".join(context_parts)
 

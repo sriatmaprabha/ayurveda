@@ -71,18 +71,31 @@ def main():
             print(f"  LLM: {status['llm']['status']}")
             continue
 
-        result = pipeline.ask(question)
+        # Retrieve context
+        retrieval = pipeline.query_engine.answer_with_sources(question, top_k=3)
+        context = retrieval["context"]
 
-        if result["error"]:
-            print(f"\nError: {result['error']}\n")
+        from src.generation.prompts import SYSTEM_PROMPT, QUERY_TEMPLATE
+        prompt = QUERY_TEMPLATE.format(context=context, question=question)
+
+        # Stream the response token by token
+        print(f"\n{'─'*60}")
+        print(f"Answer ({args.model}):\n")
+        try:
+            for token in pipeline.llm_client.generate_stream(
+                prompt=prompt,
+                system_prompt=SYSTEM_PROMPT,
+                max_tokens=512,
+            ):
+                print(token, end="", flush=True)
+            print()
+        except ConnectionError as e:
+            print(f"\nError: {e}")
             continue
 
         print(f"\n{'─'*60}")
-        print(f"Answer ({result['model']}):\n")
-        print(result["answer"])
-        print(f"\n{'─'*60}")
-        print(f"Sources ({result['num_sources']}):")
-        for i, src in enumerate(result["sources"], 1):
+        print(f"Sources ({retrieval['num_results']}):")
+        for i, src in enumerate(retrieval["sources"], 1):
             print(f"  {i}. {src['file']} — {src['section']} (score: {src['score']:.2f})")
         print()
 
