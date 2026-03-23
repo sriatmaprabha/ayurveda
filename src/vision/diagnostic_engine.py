@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .image_processor import ImageProcessor
 from .pariksha_prompts import PARIKSHA_PROMPTS
+from .text_pariksha import TEXT_PARIKSHA, process_text_pariksha
 from src.embeddings import VectorStore
 from src.retrieval import QueryEngine
 
@@ -429,13 +430,29 @@ class DiagnosticEngine:
             ),
         }
 
+    def get_text_pariksha_questions(self, pariksha_type: str) -> dict:
+        """Get text-based questions for a Pariksha type (no image needed)."""
+        if pariksha_type not in TEXT_PARIKSHA:
+            return {"error": f"Unknown type: {pariksha_type}. Valid: {list(TEXT_PARIKSHA.keys())}"}
+        return TEXT_PARIKSHA[pariksha_type]
+
+    def process_text_pariksha(self, pariksha_type: str, responses: list[dict]) -> dict:
+        """Process text-based Pariksha responses as alternative to image upload."""
+        result = process_text_pariksha(pariksha_type, responses)
+        if "error" not in result:
+            # Update session dosha scores from text pariksha
+            result["input_mode"] = "text"
+        return result
+
     def get_available_pariksha(self) -> list[dict]:
-        """List all available Pariksha examinations."""
-        return [
-            {
+        """List all available Pariksha examinations with both input modes."""
+        items = []
+        for key, val in PARIKSHA_PROMPTS.items():
+            has_text = key in TEXT_PARIKSHA
+            items.append({
                 "type": key,
                 "name": val["name"],
                 "level": val["level"],
-            }
-            for key, val in PARIKSHA_PROMPTS.items()
-        ]
+                "input_modes": ["image", "text"] if has_text else ["image"],
+            })
+        return items

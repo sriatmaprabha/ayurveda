@@ -56,10 +56,31 @@ class ParikshaResult(BaseModel):
     diagnostic_level: int
 
 
+class TextParikshaResponse(BaseModel):
+    id: str
+    answer: str
+    score: dict = Field(default_factory=dict)
+    finding: str = ""
+
+
+class TextParikshaRequest(BaseModel):
+    pariksha_type: str
+    responses: list[TextParikshaResponse]
+
+
+class TextParikshaResult(BaseModel):
+    pariksha_type: str
+    pariksha_name: str
+    dosha_scores: dict
+    findings: list[str]
+    input_mode: str = "text"
+
+
 class AvailablePariksha(BaseModel):
     type: str
     name: str
     level: int
+    input_modes: list[str] = ["image"]
 
 
 # === Endpoints ===
@@ -117,6 +138,27 @@ async def run_pariksha(pariksha_type: str, file: UploadFile = File(...)):
         )
     finally:
         os.unlink(tmp_path)
+
+
+@router.get("/pariksha/text/{pariksha_type}")
+async def get_text_pariksha_questions(pariksha_type: str):
+    """Get text-based questions for a Pariksha (no image needed)."""
+    engine = _get_engine()
+    result = engine.get_text_pariksha_questions(pariksha_type)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
+
+
+@router.post("/pariksha/text/submit", response_model=TextParikshaResult)
+async def submit_text_pariksha(request: TextParikshaRequest):
+    """Submit text-based Pariksha responses instead of an image."""
+    engine = _get_engine()
+    responses = [r.model_dump() for r in request.responses]
+    result = engine.process_text_pariksha(request.pariksha_type, responses)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return TextParikshaResult(**result)
 
 
 @router.get("/level3/questions")
