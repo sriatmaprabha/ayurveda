@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from src.generation import LLMConfig, LLMClient, ConversationalDiagnostic, DiagnosticConversation
 from src.generation.prompts import DIAGNOSTIC_SYSTEM_PROMPT, DIAGNOSTIC_QUERY_TEMPLATE
 from src.embeddings import VectorStore
-from src.retrieval import QueryEngine
+from src.retrieval import QueryEngine, AsanaRecommender
 
 router = APIRouter(prefix="/chat", tags=["Diagnostic Chat"])
 
@@ -21,6 +21,7 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent
 _sessions: dict[str, dict] = {}
 _diagnostic: ConversationalDiagnostic | None = None
 _query_engine: QueryEngine | None = None
+_asana_recommender: AsanaRecommender | None = None
 
 
 def _get_diagnostic() -> ConversationalDiagnostic:
@@ -41,6 +42,15 @@ def _get_query_engine() -> QueryEngine:
         store = VectorStore(persist_dir=PROJECT_ROOT / "data" / "vector_store")
         _query_engine = QueryEngine(vector_store=store, top_k=5)
     return _query_engine
+
+
+def _get_asana_recommender() -> AsanaRecommender:
+    global _asana_recommender
+    if _asana_recommender is None:
+        _asana_recommender = AsanaRecommender(
+            vector_store_dir=PROJECT_ROOT / "data" / "vector_store"
+        )
+    return _asana_recommender
 
 
 # === Schemas ===
@@ -243,3 +253,50 @@ async def get_chat_history(session_id: str):
         "level": conversation.level,
         "total_turns": len(conversation.turns),
     }
+
+
+# === Asana Recommendation Endpoints ===
+
+class AsanaRequest(BaseModel):
+    dosha: str = Field("", description="Dominant dosha (e.g., 'Vata', 'Pitta-Kapha')")
+    symptoms: str = Field("", description="Symptoms in natural language")
+    top_k: int = Field(5, description="Max recommendations", ge=1, le=20)
+
+
+@router.post("/recommend/asana")
+async def recommend_asana(request: AsanaRequest):
+    """Get yoga asana/kriya recommendations based on dosha and/or symptoms."""
+    recommender = _get_asana_recommender()
+
+    if request.dosha and request.symptoms:
+        result = recommender.recommend_full(request.dosha, request.symptoms, request.top_k)
+    elif request.dosha:
+        result = recommender.recommend_for_dosha(request.dosha, request.top_k)
+    elif request.symptoms:
+        result = recommender.recommend_for_symptoms(request.symptoms, request.top_k)
+    else:
+        raise HTTPException(status_code=400, detail="Provide at least 'dosha' or 'symptoms'")
+
+    return result
+
+
+@router.get("/recommend/asana/{session_id}")
+async def recommend_asana_for_session(session_id: str):
+    """Get asana recommendations based on the diagnostic session's findings."""
+    if session_id not in _sessions:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    conversation: DiagnosticConversation = _sessions[session_id]["conversation"]
+    recommender = _get_asana_recommender()
+
+    # Collect all patient messages as symptom text
+    patient_messages = [t.message for t in conversation.turns if t.role == "patient"]
+    symptoms_text = " ".join(patient_messages)
+
+    result = recommender.recommend_full(
+        dominant_dosha=conversation.dominant_dosha,
+        symptoms_text=symptoms_text,
+        top_k=5,
+    )
+
+    return result
