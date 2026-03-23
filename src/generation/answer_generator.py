@@ -14,9 +14,13 @@ class AnswerGenerator:
     def __init__(self, llm_client: LLMClient | None = None, config: LLMConfig | None = None):
         self.llm = llm_client or LLMClient(config)
 
-    def generate_answer(self, question: str, context: str) -> dict:
-        """Generate an answer for a question using provided context."""
-        prompt = QUERY_TEMPLATE.format(context=context, question=question)
+    def generate_answer(self, question: str, context: str, asana_context: str = "") -> dict:
+        """Generate an answer for a question using provided context and asana protocols."""
+        prompt = QUERY_TEMPLATE.format(
+            context=context,
+            asana_context=asana_context or "No specific asana protocols retrieved.",
+            question=question,
+        )
 
         try:
             answer = self.llm.generate(

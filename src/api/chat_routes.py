@@ -115,25 +115,33 @@ async def send_message(request: ChatRequest):
     diagnostic = _get_diagnostic()
     engine = _get_query_engine()
 
-    # Retrieve relevant context from knowledge base
+    # Retrieve relevant context + asana protocols from knowledge base
     context = ""
+    asana_context = ""
     sources = []
     try:
         retrieval = engine.answer_with_sources(request.message)
         context = retrieval["context"]
+        asana_context = retrieval.get("asana_context", "")
         sources = [
             {"file": s["file"], "section": s["section"], "score": s["score"]}
             for s in retrieval["sources"]
         ]
-    except Exception as e:
+    except Exception:
         context = ""
+        asana_context = ""
         sources = []
+
+    # Combine context with asana protocols for richer response
+    combined_context = context
+    if asana_context and "No specific asana" not in asana_context:
+        combined_context = f"{context}\n\n--- YOGA/ASANA PROTOCOLS ---\n\n{asana_context}"
 
     # Generate response (always ends with a question)
     response = diagnostic.respond(
         conversation=conversation,
         patient_message=request.message,
-        context=context,
+        context=combined_context,
     )
 
     turn_number = len([t for t in conversation.turns if t.role == "patient"])
@@ -170,19 +178,23 @@ async def stream_message(request: ChatRequest):
     conversation: DiagnosticConversation = session["conversation"]
     engine = _get_query_engine()
 
-    # Retrieve context
+    # Retrieve context + asana protocols
     context = ""
+    asana_context = ""
     try:
         retrieval = engine.answer_with_sources(request.message, top_k=3)
         context = retrieval["context"]
+        asana_context = retrieval.get("asana_context", "")
     except Exception:
         context = ""
+        asana_context = ""
 
     conversation.add_patient_message(request.message)
 
     # Build the prompt
     prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
         context=context if context else "No specific context retrieved.",
+        asana_context=asana_context if asana_context else "No specific asana protocols retrieved.",
         conversation_history=conversation.history_text,
         message=request.message,
         vata_score=conversation.vata_score,

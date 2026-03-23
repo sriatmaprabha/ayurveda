@@ -39,8 +39,9 @@ class RAGPipeline:
         context = retrieval["context"]
         sources = retrieval["sources"]
 
-        # Step 2: Generate answer
-        generation = self.generator.generate_answer(question, context)
+        # Step 2: Generate answer with asana context
+        asana_context = retrieval.get("asana_context", "")
+        generation = self.generator.generate_answer(question, context, asana_context)
 
         return {
             "question": question,

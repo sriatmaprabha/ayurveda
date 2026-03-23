@@ -71,12 +71,17 @@ def main():
             print(f"  LLM: {status['llm']['status']}")
             continue
 
-        # Retrieve context
+        # Retrieve context + asana protocols
         retrieval = pipeline.query_engine.answer_with_sources(question, top_k=3)
         context = retrieval["context"]
+        asana_context = retrieval.get("asana_context", "")
 
         from src.generation.prompts import SYSTEM_PROMPT, QUERY_TEMPLATE
-        prompt = QUERY_TEMPLATE.format(context=context, question=question)
+        prompt = QUERY_TEMPLATE.format(
+            context=context,
+            asana_context=asana_context or "No specific asana protocols retrieved.",
+            question=question,
+        )
 
         # Stream the response token by token
         print(f"\n{'─'*60}")

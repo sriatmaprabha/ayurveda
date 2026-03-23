@@ -56,8 +56,9 @@ class MonitoredRAGPipeline:
         retrieval = self.query_engine.answer_with_sources(question, top_k)
         context = retrieval["context"]
 
-        # Generate
-        generation = self.generator.generate_answer(question, context)
+        # Generate with asana context
+        asana_context = retrieval.get("asana_context", "")
+        generation = self.generator.generate_answer(question, context, asana_context)
 
         latency_ms = self.monitor.end_timer(start)
 

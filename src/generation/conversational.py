@@ -99,12 +99,14 @@ class ConversationalDiagnostic:
         conversation: DiagnosticConversation,
         patient_message: str,
         context: str = "",
+        asana_context: str = "",
     ) -> str:
         """Generate a diagnostic response that always ends with a follow-up question."""
         conversation.add_patient_message(patient_message)
 
         prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
             context=context if context else "No specific context retrieved for this turn.",
+            asana_context=asana_context if asana_context else "No specific asana protocols retrieved for this turn.",
             conversation_history=conversation.history_text,
             message=patient_message,
             vata_score=conversation.vata_score,

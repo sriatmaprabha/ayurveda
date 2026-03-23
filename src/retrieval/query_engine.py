@@ -7,6 +7,9 @@ from src.embeddings.vector_store import VectorStore
 
 logger = logging.getLogger(__name__)
 
+# Source files that contain asana/kriya protocols with step-by-step instructions
+ASANA_SOURCES = {"insert_asanas.sql", "asana_recommendations.csv"}
+
 
 class QueryEngine:
     """Retrieves relevant Ayurveda knowledge for a given question."""
@@ -26,6 +29,30 @@ class QueryEngine:
 
         return results
 
+    def retrieve_asana_context(self, question: str, top_k: int = 3) -> str:
+        """Retrieve yoga asana/kriya protocols specifically, with full technique text."""
+        # Search specifically for asana protocols
+        asana_query = f"yoga asana kriya pranayama technique for {question}"
+        results = self.vector_store.query(query_text=asana_query, top_k=top_k)
+
+        parts = []
+        for i, r in enumerate(results, 1):
+            score = 1 - r["distance"] if r["distance"] is not None else 0
+            if score < 0.30:
+                continue
+
+            source = r["metadata"].get("file_name", "Unknown")
+            section = r["metadata"].get("section_title", "")
+
+            header = f"[Asana Source {i}: {source} — {section} (relevance: {score:.2f})]"
+
+            # For asana records, keep FULL text (no trimming) — we need the complete instructions
+            text = r["text"]
+
+            parts.append(f"{header}\n{text}")
+
+        return "\n\n---\n\n".join(parts) if parts else "No specific asana protocols found for this query."
+
     def build_context(self, question: str, top_k: int | None = None) -> str:
         """Build a context string from retrieved chunks for LLM consumption."""
         results = self.retrieve(question, top_k)
@@ -44,19 +71,27 @@ class QueryEngine:
                 header += f" — {section}"
             header += f" (relevance: {score:.2f})]"
 
-            # Trim each chunk to max 300 words to reduce LLM input size
             text = r["text"]
-            words = text.split()
-            if len(words) > 300:
-                text = " ".join(words[:300]) + "..."
+            is_asana = source in ASANA_SOURCES
+
+            # For asana sources, keep full text (instructions are critical)
+            # For other sources, trim to 300 words
+            if not is_asana:
+                words = text.split()
+                if len(words) > 300:
+                    text = " ".join(words[:300]) + "..."
+
             context_parts.append(f"{header}\n{text}")
 
         return "\n\n---\n\n".join(context_parts)
 
     def answer_with_sources(self, question: str, top_k: int | None = None) -> dict:
-        """Return structured result with context and source references."""
+        """Return structured result with context, asana context, and source references."""
         results = self.retrieve(question, top_k)
         context = self.build_context(question, top_k)
+
+        # Always fetch asana recommendations alongside main context
+        asana_context = self.retrieve_asana_context(question)
 
         sources = []
         for r in results:
@@ -70,6 +105,7 @@ class QueryEngine:
         return {
             "question": question,
             "context": context,
+            "asana_context": asana_context,
             "sources": sources,
             "num_results": len(results),
         }

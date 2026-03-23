@@ -17,9 +17,10 @@ def test_llm_config_defaults():
 def test_query_template_formatting():
     context = "Triphala is a herbal formulation."
     question = "What is Triphala?"
-    prompt = QUERY_TEMPLATE.format(context=context, question=question)
+    prompt = QUERY_TEMPLATE.format(context=context, asana_context="Padmasana: sit cross-legged", question=question)
     assert "Triphala is a herbal formulation" in prompt
     assert "What is Triphala?" in prompt
+    assert "Padmasana" in prompt
 
 
 def test_answer_generator_with_mock_llm():
