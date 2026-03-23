@@ -62,6 +62,8 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down pipeline")
 
 
+from .diagnostic_routes import router as diagnostic_router
+
 app = FastAPI(
     title="Ayurveda RAG API",
     description="Ask questions about Ayurveda, grounded in classical texts like "
@@ -76,6 +78,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(diagnostic_router)
 
 
 def _get_pipeline() -> MonitoredRAGPipeline:
