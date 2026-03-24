@@ -890,9 +890,12 @@ async function startWithMessage(msg) {
 function clearWelcome() {
   const welcome = document.getElementById('welcomeScreen');
   if (welcome) welcome.remove();
-  // Ensure messages container exists
+  // Ensure messages container exists — but never wipe existing messages
   if (!document.getElementById('messagesContainer')) {
-    chatMessages.innerHTML = '<div class="messages-container" id="messagesContainer"></div>';
+    const mc = document.createElement('div');
+    mc.className = 'messages-container';
+    mc.id = 'messagesContainer';
+    chatMessages.appendChild(mc);
   }
 }
 
@@ -929,18 +932,21 @@ function addMessage(role, text) {
   return row;
 }
 
+let streamMsgCounter = 0;
+
 function addStreamingMessage() {
   clearWelcome();
   const container = getMessagesContainer();
   const row = document.createElement('div');
   row.className = 'message-row assistant';
-  row.id = 'streamingMsg';
+  streamMsgCounter++;
+  const bubbleId = 'streamBubble_' + streamMsgCounter;
 
   row.innerHTML = `
     <div class="message-avatar">&#x1F33F;</div>
     <div class="message-content">
       <div class="message-name">Ayurveda Vaidya</div>
-      <div class="message-bubble" id="streamingBubble">
+      <div class="message-bubble" id="${bubbleId}">
         <div class="typing-indicator">
           <div class="typing-dot"></div>
           <div class="typing-dot"></div>
@@ -952,7 +958,7 @@ function addStreamingMessage() {
 
   container.appendChild(row);
   scrollToBottom();
-  return document.getElementById('streamingBubble');
+  return document.getElementById(bubbleId);
 }
 
 function scrollToBottom() {

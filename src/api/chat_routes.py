@@ -87,7 +87,7 @@ async def start_chat():
     }
 
     opening = (
-        "Namaste! I am your Ayurvedic diagnostic assistant. I will help identify "
+        "Nithyanandam! I am your Ayurvedic diagnostic assistant. I will help identify "
         "your dosha imbalance and guide you toward a personalized treatment plan "
         "based on classical Ayurvedic texts.\n\n"
         "I'll ask you a series of questions to understand your condition. "
