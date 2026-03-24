@@ -84,7 +84,7 @@ def main():
         )
 
         # Stream the response token by token
-        print(f"\n{'─'*60}")
+        print(f"\n{'-'*60}")
         print(f"Answer ({args.model}):\n")
         try:
             for token in pipeline.llm_client.generate_stream(
@@ -94,11 +94,11 @@ def main():
             ):
                 print(token, end="", flush=True)
             print()
-        except ConnectionError as e:
+        except (ConnectionError, RuntimeError) as e:
             print(f"\nError: {e}")
             continue
 
-        print(f"\n{'─'*60}")
+        print(f"\n{'-'*60}")
         print(f"Sources ({retrieval['num_results']}):")
         for i, src in enumerate(retrieval["sources"], 1):
             print(f"  {i}. {src['file']} — {src['section']} (score: {src['score']:.2f})")

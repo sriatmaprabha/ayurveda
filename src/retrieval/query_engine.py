@@ -29,8 +29,8 @@ class QueryEngine:
 
         return results
 
-    def retrieve_asana_context(self, question: str, top_k: int = 3) -> str:
-        """Retrieve yoga asana/kriya protocols specifically, with full technique text."""
+    def retrieve_asana_context(self, question: str, top_k: int = 2) -> str:
+        """Retrieve yoga asana/kriya protocols specifically, with technique text."""
         # Search specifically for asana protocols
         asana_query = f"yoga asana kriya pranayama technique for {question}"
         results = self.vector_store.query(query_text=asana_query, top_k=top_k)
@@ -46,8 +46,11 @@ class QueryEngine:
 
             header = f"[Asana Source {i}: {source} — {section} (relevance: {score:.2f})]"
 
-            # For asana records, keep FULL text (no trimming) — we need the complete instructions
+            # Keep asana text but cap at 500 words to fit GPU memory
             text = r["text"]
+            words = text.split()
+            if len(words) > 500:
+                text = " ".join(words[:500]) + "..."
 
             parts.append(f"{header}\n{text}")
 
@@ -74,12 +77,11 @@ class QueryEngine:
             text = r["text"]
             is_asana = source in ASANA_SOURCES
 
-            # For asana sources, keep full text (instructions are critical)
-            # For other sources, trim to 300 words
-            if not is_asana:
-                words = text.split()
-                if len(words) > 300:
-                    text = " ".join(words[:300]) + "..."
+            # Trim all sources to fit within GPU memory limits
+            words = text.split()
+            max_words = 400 if is_asana else 200
+            if len(words) > max_words:
+                text = " ".join(words[:max_words]) + "..."
 
             context_parts.append(f"{header}\n{text}")
 

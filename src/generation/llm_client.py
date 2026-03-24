@@ -132,6 +132,14 @@ class LLMClient:
                 f"LLM server not reachable at {self.config.base_url}. "
                 "Start your LLM server first."
             )
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 500:
+                raise RuntimeError(
+                    f"LLM server error (500). This usually means the prompt is too large "
+                    f"for available GPU memory. Try a smaller model: "
+                    f"'ollama pull llama3.2:3b' or reduce top_k."
+                )
+            raise
 
     def generate_stream(
         self,
