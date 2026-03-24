@@ -1051,14 +1051,14 @@ async function sendMessage() {
 
   closeSidebar();
 
-  // Start session if needed
+  // Start session if needed (don't show opening message — let the stream response be the first reply)
   if (!sessionId) {
     const openingMsg = await startSession();
     if (!openingMsg) {
       addMessage('assistant', 'Unable to connect to the server. Please ensure the API is running and try again.');
       return;
     }
-    addMessage('assistant', openingMsg);
+    // Don't display the opening message separately — the LLM/casual handler will respond naturally
   }
 
   // Add user message

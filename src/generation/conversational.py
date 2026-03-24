@@ -82,11 +82,13 @@ CASUAL_PATTERNS = re.compile(
 
 CASUAL_RESPONSES = {
     "greeting": (
-        "Nithyanandam! Welcome. I'm your Ayurvedic diagnostic assistant. "
-        "I can help you understand your dosha constitution, recommend yoga asanas, "
-        "suggest dietary guidelines, and guide you through classical Ayurvedic treatments.\n\n"
+        "Nithyanandam! How can I help you today? I can assist with:\n\n"
+        "- Dosha assessment (Vata, Pitta, Kapha)\n"
+        "- Yoga asana recommendations for specific conditions\n"
+        "- Dietary and lifestyle guidance\n"
+        "- Understanding symptoms from an Ayurvedic perspective\n\n"
         "What would you like to explore — do you have a specific health concern, "
-        "or would you like to start with a dosha assessment?"
+        "or shall we start with understanding your body constitution?"
     ),
     "thanks": (
         "You're welcome! I'm happy to help with your Ayurvedic journey.\n\n"
