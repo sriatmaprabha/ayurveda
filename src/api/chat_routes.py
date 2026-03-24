@@ -9,6 +9,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from src.generation import LLMConfig, LLMClient, ConversationalDiagnostic, DiagnosticConversation
+from src.generation.conversational import classify_casual, CASUAL_RESPONSES
 from src.generation.prompts import DIAGNOSTIC_SYSTEM_PROMPT, DIAGNOSTIC_QUERY_TEMPLATE
 from src.embeddings import VectorStore
 from src.retrieval import QueryEngine, AsanaRecommender
@@ -115,6 +116,26 @@ async def send_message(request: ChatRequest):
     diagnostic = _get_diagnostic()
     engine = _get_query_engine()
 
+    # Check if this is a casual/greeting message — no need for retrieval
+    casual_type = classify_casual(request.message)
+    if casual_type:
+        response = CASUAL_RESPONSES.get(casual_type, CASUAL_RESPONSES["filler"])
+        conversation.add_patient_message(request.message)
+        conversation.add_vaidya_response(response)
+        turn_number = len([t for t in conversation.turns if t.role == "patient"])
+        return ChatResponse(
+            session_id=request.session_id,
+            response=response,
+            dosha_scores={
+                "vata": conversation.vata_score,
+                "pitta": conversation.pitta_score,
+                "kapha": conversation.kapha_score,
+            },
+            dominant_dosha=conversation.dominant_dosha,
+            turn_number=turn_number,
+            sources=[],
+        )
+
     # Retrieve relevant context + asana protocols from knowledge base
     context = ""
     asana_context = ""
@@ -177,6 +198,22 @@ async def stream_message(request: ChatRequest):
     session = _sessions[request.session_id]
     conversation: DiagnosticConversation = session["conversation"]
     engine = _get_query_engine()
+
+    # Check if this is a casual/greeting message — respond instantly, no LLM needed
+    casual_type = classify_casual(request.message)
+    if casual_type:
+        response = CASUAL_RESPONSES.get(casual_type, CASUAL_RESPONSES["filler"])
+        conversation.add_patient_message(request.message)
+        conversation.add_vaidya_response(response)
+
+        def casual_stream():
+            yield response
+
+        return StreamingResponse(
+            casual_stream(),
+            media_type="text/plain",
+            headers={"X-Session-Id": request.session_id},
+        )
 
     # Retrieve context + asana protocols
     context = ""

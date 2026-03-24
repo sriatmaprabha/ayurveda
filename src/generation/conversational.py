@@ -62,6 +62,83 @@ FALLBACK_QUESTIONS = [
 ]
 
 
+import re
+
+# Patterns that indicate casual/greeting messages (not medical queries)
+CASUAL_PATTERNS = re.compile(
+    r"^\s*("
+    r"hi\b|hello\b|hey\b|hii+\b|hola\b|howdy\b"
+    r"|good\s*(morning|afternoon|evening|night|day)\b"
+    r"|nithyanandam\b|namaste\b|namaskar\b|vanakkam\b"
+    r"|thanks?\b|thank\s*you\b|ty\b|thx\b"
+    r"|ok\b|okay\b|sure\b|yes\b|yeah\b|yep\b|no\b|nope\b"
+    r"|bye\b|goodbye\b|see\s*you\b|take\s*care\b"
+    r"|how\s*are\s*you\b|what'?s\s*up\b|sup\b"
+    r"|who\s*are\s*you\b|what\s*can\s*you\s*do\b|help\b"
+    r"|hmm+\b|oh\b|ah\b|wow\b|nice\b|cool\b|great\b"
+    r")\s*[!?.]*\s*$",
+    re.IGNORECASE,
+)
+
+CASUAL_RESPONSES = {
+    "greeting": (
+        "Nithyanandam! Welcome. I'm your Ayurvedic diagnostic assistant. "
+        "I can help you understand your dosha constitution, recommend yoga asanas, "
+        "suggest dietary guidelines, and guide you through classical Ayurvedic treatments.\n\n"
+        "What would you like to explore — do you have a specific health concern, "
+        "or would you like to start with a dosha assessment?"
+    ),
+    "thanks": (
+        "You're welcome! I'm happy to help with your Ayurvedic journey.\n\n"
+        "Is there anything else you'd like to know — perhaps about your diet, "
+        "a specific yoga practice, or another health concern?"
+    ),
+    "bye": (
+        "Take care! Remember to maintain a regular daily routine (dinacharya) "
+        "and eat according to your constitution.\n\n"
+        "Feel free to come back anytime you have questions about your health. "
+        "Would you like a quick summary of what we discussed before you go?"
+    ),
+    "who": (
+        "I'm an Ayurvedic diagnostic assistant powered by classical texts — "
+        "Charaka Samhita, Sushruta Samhita, Ashtanga Hridaya, and more. "
+        "I can help with dosha assessment, yoga recommendations, dietary advice, "
+        "and treatment protocols grounded in authentic Ayurveda.\n\n"
+        "Would you like to start with a health concern or a general dosha check?"
+    ),
+    "affirmative": (
+        "Great! Let's continue.\n\n"
+        "What specific health concern or symptom would you like to discuss?"
+    ),
+    "filler": (
+        "I'm here to help! Feel free to describe any symptoms, health concerns, "
+        "or questions about Ayurveda.\n\n"
+        "Would you like to start with a dosha assessment, or do you have a specific issue in mind?"
+    ),
+}
+
+
+def classify_casual(message: str) -> str | None:
+    """Return a casual response category if the message is not a medical query, else None."""
+    msg = message.strip()
+    if not CASUAL_PATTERNS.match(msg):
+        return None
+
+    msg_lower = msg.lower().rstrip("!?. ")
+    if any(w in msg_lower for w in ("hi", "hello", "hey", "hii", "morning", "afternoon", "evening",
+                                     "night", "nithyanandam", "namaste", "namaskar", "vanakkam", "howdy", "hola")):
+        return "greeting"
+    if any(w in msg_lower for w in ("thank", "thanks", "ty", "thx")):
+        return "thanks"
+    if any(w in msg_lower for w in ("bye", "goodbye", "see you", "take care")):
+        return "bye"
+    if any(w in msg_lower for w in ("who are you", "what can you", "help")):
+        return "who"
+    if any(w in msg_lower for w in ("ok", "okay", "sure", "yes", "yeah", "yep")):
+        return "affirmative"
+    return "filler"
+
+
 class ConversationalDiagnostic:
     """LLM-powered diagnostic conversation that always asks follow-up questions."""
 
