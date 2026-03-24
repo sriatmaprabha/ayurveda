@@ -71,15 +71,32 @@ def main():
             print(f"  LLM: {status['llm']['status']}")
             continue
 
-        # Retrieve context + asana protocols
+        # Check if casual message — respond instantly
+        from src.generation.conversational import classify_casual, CASUAL_RESPONSES
+        casual_type = classify_casual(question)
+        if casual_type:
+            print(f"\n{CASUAL_RESPONSES.get(casual_type, CASUAL_RESPONSES['filler'])}\n")
+            continue
+
+        # Get fixed asana protocols (deterministic)
+        from src.retrieval.protocol_mapper import ProtocolMapper
+        mapper = ProtocolMapper()
+        protocols = mapper.get_protocols_for_text(question, max_protocols=2)
+        protocol_text = ""
+        if protocols:
+            protocol_text = "\n\n--- PRESCRIBED YOGA PROTOCOLS ---\n"
+            for p in protocols:
+                protocol_text += mapper.format_protocol_for_chat(p) + "\n"
+
+        # Retrieve KB context
         retrieval = pipeline.query_engine.answer_with_sources(question, top_k=3)
         context = retrieval["context"]
-        asana_context = retrieval.get("asana_context", "")
 
         from src.generation.prompts import SYSTEM_PROMPT, QUERY_TEMPLATE
+        combined = context + protocol_text if protocol_text else context
         prompt = QUERY_TEMPLATE.format(
-            context=context,
-            asana_context=asana_context or "No specific asana protocols retrieved.",
+            context=combined,
+            asana_context="Protocols included above." if protocol_text else "No specific protocols.",
             question=question,
         )
 
