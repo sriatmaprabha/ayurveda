@@ -7,6 +7,8 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from src.generation import LLMConfig
 from src.orchestrator import MonitoredRAGPipeline
@@ -82,6 +84,15 @@ app.add_middleware(
 
 app.include_router(diagnostic_router)
 app.include_router(chat_router)
+
+# Serve static frontend
+app.mount("/static", StaticFiles(directory=str(PROJECT_ROOT / "static")), name="static")
+
+
+@app.get("/")
+async def root():
+    """Redirect root to the chat frontend."""
+    return RedirectResponse(url="/static/index.html")
 
 
 def _get_pipeline() -> MonitoredRAGPipeline:
