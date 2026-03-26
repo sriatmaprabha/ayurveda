@@ -1,0 +1,45 @@
+{
+  "total_records": 48667,
+  "total_source_files": 134,
+  "category_counts": {
+    "general": 34583,
+    "disease_treatment": 6505,
+    "food_diet_knowledge": 5110,
+    "herb_knowledge": 3244,
+    "dosha_knowledge": 3128,
+    "anatomy_physiology": 1960,
+    "formulations": 1623,
+    "diagnosis_methods": 1515,
+    "mental_health": 1421,
+    "asana_knowledge": 1371,
+    "daily_seasonal_routine": 603,
+    "panchakarma_therapy": 595
+  },
+  "dosha_coverage": {
+    "vata_mentions": 2579,
+    "pitta_mentions": 3169,
+    "kapha_mentions": 3205
+  },
+  "condition_coverage": {
+    "Jwara": 1588,
+    "Kasa": 914,
+    "Vrana": 697,
+    "Shwasa": 503,
+    "Vibandha": 409,
+    "Shirahshoola": 336,
+    "Prameha": 332,
+    "Shotha": 315,
+    "Arsha": 281,
+    "Kushtha": 281,
+    "Sthaulya": 249,
+    "Apasmara": 208,
+    "Hridroga": 207,
+    "Pandu": 205,
+    "Chittodvega": 201,
+    "Sandhivata": 174,
+    "Vishada": 146,
+    "Anidra": 144,
+    "Atisara": 123,
+    "Netra Roga": 57
+  }
+}
