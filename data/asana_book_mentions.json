@@ -1,0 +1,597 @@
+{
+  "Padmasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Lotus Pose Variation 4",
+      "score": 0.74
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Lotus Pose Variation 3",
+      "score": 0.72
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.71
+    }
+  ],
+  "Siddhasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Siddhasana",
+      "score": 0.64
+    }
+  ],
+  "Vajrasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Thunderbolt Pose",
+      "score": 0.65
+    }
+  ],
+  "Shavasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.63
+    }
+  ],
+  "Bhujangasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "asana_recommendations.csv",
+      "section": "Cure For Hernia",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.66
+    }
+  ],
+  "Sarvangasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Shoulder Stand",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.67
+    }
+  ],
+  "Matsyasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Fish Pose 2",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    }
+  ],
+  "Halasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.63
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.62
+    }
+  ],
+  "Paschimottanasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.61
+    }
+  ],
+  "Ardha Matsyendrasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Infinite Pose",
+      "score": 0.64
+    }
+  ],
+  "Sirshasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.74
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.67
+    }
+  ],
+  "Dhanurasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yathasanisthasana",
+      "score": 0.63
+    }
+  ],
+  "Trikonasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Infinite Pose",
+      "score": 0.64
+    }
+  ],
+  "Surya Namaskar": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.73
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.71
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.69
+    }
+  ],
+  "Pavana Muktasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Head Pose",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Wind Release Pose",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.66
+    }
+  ],
+  "Gomukhasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.71
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Head Pose",
+      "score": 0.64
+    }
+  ],
+  "Simhasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Man-Lion Pose",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Head Pose",
+      "score": 0.65
+    }
+  ],
+  "Naukasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Sideways Boat Pose",
+      "score": 0.66
+    }
+  ],
+  "Ustrasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.64
+    }
+  ],
+  "Mandukasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Ball Pose",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    }
+  ],
+  "Shalabhasana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.62
+    },
+    {
+      "source": "asana_recommendations.csv",
+      "section": "Cure For Hernia",
+      "score": 0.61
+    }
+  ],
+  "Kapalabhati": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Skull Pose",
+      "score": 0.71
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Head Pose",
+      "score": 0.63
+    }
+  ],
+  "Bhastrika": [
+    {
+      "source": "asana_recommendations.csv",
+      "section": "Cure For Hernia",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "asana_recommendations.csv",
+      "section": "CREATING LEDERSHIP CONSCIOUSNESS I",
+      "score": 0.65
+    }
+  ],
+  "Nadi Shodhana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Cockerel Pose",
+      "score": 0.62
+    }
+  ],
+  "Sheetali": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.61
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.6
+    }
+  ],
+  "Bhramari": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.69
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.64
+    }
+  ],
+  "Ujjayi": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.6
+    },
+    {
+      "source": "asana_recommendations.csv",
+      "section": "Cure For Hernia",
+      "score": 0.6
+    }
+  ],
+  "Trataka": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.71
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.68
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.68
+    }
+  ],
+  "Yoga Nidra": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.6
+    }
+  ],
+  "Varaha Asana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.73
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.71
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.68
+    }
+  ],
+  "Matsyendra Asana": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yogic Sleep Pose",
+      "score": 0.64
+    }
+  ],
+  "Trishoola Kumbhaka": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.63
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Bow Pose",
+      "score": 0.61
+    }
+  ],
+  "Sheethalee Kumbhaka": [
+    {
+      "source": "asana_recommendations.csv",
+      "section": "Cure For Hernia",
+      "score": 0.65
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Lotus Pose Variation 4",
+      "score": 0.62
+    }
+  ],
+  "Trinetra Kumbhaka": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.67
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.64
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Belt Pose",
+      "score": 0.63
+    }
+  ],
+  "Seethkaaree": [
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose 2",
+      "score": 0.7
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Yoga Pose",
+      "score": 0.66
+    },
+    {
+      "source": "insert_asanas.sql",
+      "section": "Swinging Pose",
+      "score": 0.63
+    }
+  ]
+}
