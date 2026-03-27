@@ -324,6 +324,23 @@ async def stream_message(request: ChatRequest):
         for t in recent_turns
     )
 
+    # Phase instruction based on prakriti status
+    if prakriti.is_determined:
+        phase_instruction = (
+            f"PRESCRIBING PHASE -- Prakriti IS determined as {prakriti.dominant}. "
+            f"Now give specific remedies grounded in their {prakriti.dominant} constitution. "
+            "Give asana protocols with FULL step-by-step instructions from the context. "
+            "Give herb recommendations with dosages, timing, and reasoning."
+        )
+    else:
+        phase_instruction = (
+            "GATHERING PHASE -- Prakriti NOT yet determined. "
+            "Do NOT prescribe remedies, asanas, or herbs yet. You do not have enough information. "
+            "Acknowledge their symptoms in 1-2 sentences with brief Ayurvedic insight. "
+            "Say: 'Once I understand your full constitution, I will give you the exact protocol.' "
+            "Keep response to 2-3 sentences. A prakriti question will be appended automatically."
+        )
+
     # Build prompt
     prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
         context=combined_context if combined_context else "No specific context retrieved.",
@@ -335,6 +352,7 @@ async def stream_message(request: ChatRequest):
         kapha_score=conversation.kapha_score,
         dominant_dosha=prakriti.dominant,
         level=conversation.level,
+        phase_instruction=phase_instruction,
     )
 
     config = LLMConfig(

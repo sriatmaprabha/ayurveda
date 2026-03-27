@@ -180,6 +180,12 @@ class ConversationalDiagnostic:
         """Generate a diagnostic response that always ends with a follow-up question."""
         conversation.add_patient_message(patient_message)
 
+        # Default phase instruction for non-chat-route usage
+        phase_instruction = (
+            "GATHERING PHASE -- Keep response brief. Acknowledge symptoms, "
+            "share brief Ayurvedic insight. Do NOT prescribe remedies yet."
+        )
+
         prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
             context=context if context else "No specific context retrieved for this turn.",
             asana_context=asana_context if asana_context else "No specific asana protocols retrieved for this turn.",
@@ -190,6 +196,7 @@ class ConversationalDiagnostic:
             kapha_score=conversation.kapha_score,
             dominant_dosha=conversation.dominant_dosha,
             level=conversation.level,
+            phase_instruction=phase_instruction,
         )
 
         try:
