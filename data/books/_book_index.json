@@ -1,0 +1,612 @@
+{
+  "total_books": 101,
+  "total_chunks": 44937,
+  "books": [
+    {
+      "book": "The-Sushruta-Samhita--Vol1_English",
+      "chunks": 5003,
+      "file": "The-Sushruta-Samhita--Vol1_English.jsonl",
+      "size_kb": 4636.1
+    },
+    {
+      "book": "astanga-hridaya-sutrasthan-handbook",
+      "chunks": 3736,
+      "file": "astanga-hridaya-sutrasthan-handbook.jsonl",
+      "size_kb": 5115.9
+    },
+    {
+      "book": "The-Sushruta-Samhita--Vol2_English",
+      "chunks": 3516,
+      "file": "The-Sushruta-Samhita--Vol2_English.jsonl",
+      "size_kb": 4337.3
+    },
+    {
+      "book": "sushruta_uttara",
+      "chunks": 2952,
+      "file": "sushruta_uttara.jsonl",
+      "size_kb": 4111.3
+    },
+    {
+      "book": "2015.325781.The-Caraka_V2",
+      "chunks": 1987,
+      "file": "2015.325781.The-Caraka_V2.jsonl",
+      "size_kb": 11181.6
+    },
+    {
+      "book": "sushruta_chikitsa",
+      "chunks": 1728,
+      "file": "sushruta_chikitsa.jsonl",
+      "size_kb": 3401.6
+    },
+    {
+      "book": "Indian_Medicinal_Plants",
+      "chunks": 1357,
+      "file": "Indian_Medicinal_Plants.jsonl",
+      "size_kb": 2344.7
+    },
+    {
+      "book": "Natural_Secrets_to_Healing,_Prevention_&_Longevity",
+      "chunks": 1169,
+      "file": "Natural_Secrets_to_Healing,_Prevention_&_Longevity.jsonl",
+      "size_kb": 2767.2
+    },
+    {
+      "book": "sushruta_nidana",
+      "chunks": 1010,
+      "file": "sushruta_nidana.jsonl",
+      "size_kb": 1429.3
+    },
+    {
+      "book": "Bogar_7000_Sapthakaandam",
+      "chunks": 910,
+      "file": "Bogar_7000_Sapthakaandam.jsonl",
+      "size_kb": 2243.0
+    },
+    {
+      "book": "Rasayana_Ayurvedic_herbs_for_longevity_and_rejuvenation",
+      "chunks": 881,
+      "file": "Rasayana_Ayurvedic_herbs_for_longevity_and_rejuvenation.jsonl",
+      "size_kb": 1301.3
+    },
+    {
+      "book": "2015.63710.The-Caraka-Samhita1",
+      "chunks": 827,
+      "file": "2015.63710.The-Caraka-Samhita1.jsonl",
+      "size_kb": 2853.4
+    },
+    {
+      "book": "sushrutha-english-translation",
+      "chunks": 797,
+      "file": "sushrutha-english-translation.jsonl",
+      "size_kb": 2070.8
+    },
+    {
+      "book": "Tirumantiram",
+      "chunks": 725,
+      "file": "Tirumantiram.jsonl",
+      "size_kb": 1251.5
+    },
+    {
+      "book": "Sushruta_Samhita_-_Choukhamba",
+      "chunks": 705,
+      "file": "Sushruta_Samhita_-_Choukhamba.jsonl",
+      "size_kb": 5523.0
+    },
+    {
+      "book": "A_Handbook_of_History_of_Ayurveda_-_Vidyanath_(2ed_2009)",
+      "chunks": 643,
+      "file": "A_Handbook_of_History_of_Ayurveda_-_Vidyanath_(2ed_2009).jsonl",
+      "size_kb": 1249.1
+    },
+    {
+      "book": "Sushruta_Samhita_Vol_2",
+      "chunks": 592,
+      "file": "Sushruta_Samhita_Vol_2.jsonl",
+      "size_kb": 1975.0
+    },
+    {
+      "book": "Astanga-hrdayam._Eng",
+      "chunks": 578,
+      "file": "Astanga-hrdayam._Eng.jsonl",
+      "size_kb": 1483.0
+    },
+    {
+      "book": "35_Years_East_Punjab_&_Kashmir_in_Connection_with_medicine_Botany_&_Pharmacy_John_Martin_Honigberger",
+      "chunks": 551,
+      "file": "35_Years_East_Punjab_&_Kashmir_in_Connection_with_medicine_Botany_&_Pharmacy_John_Martin_Honigberger.jsonl",
+      "size_kb": 2342.2
+    },
+    {
+      "book": "Shushrutha_samhita",
+      "chunks": 530,
+      "file": "Shushrutha_samhita.jsonl",
+      "size_kb": 1310.8
+    },
+    {
+      "book": "Body_and_Health_in_Yoga,_Ayurveda_and_Tantra",
+      "chunks": 499,
+      "file": "Body_and_Health_in_Yoga,_Ayurveda_and_Tantra.jsonl",
+      "size_kb": 1560.0
+    },
+    {
+      "book": "sushruta_kalpa",
+      "chunks": 492,
+      "file": "sushruta_kalpa.jsonl",
+      "size_kb": 784.3
+    },
+    {
+      "book": "sushruta_samhita_critical",
+      "chunks": 483,
+      "file": "sushruta_samhita_critical.jsonl",
+      "size_kb": 3871.0
+    },
+    {
+      "book": "Materia_Medica_of_Ayurveda",
+      "chunks": 455,
+      "file": "Materia_Medica_of_Ayurveda.jsonl",
+      "size_kb": 1769.4
+    },
+    {
+      "book": "Aghor_Medicine_Pollution,_Death,_and_Healing_in_Northern_India_Ron_Barrett",
+      "chunks": 446,
+      "file": "Aghor_Medicine_Pollution,_Death,_and_Healing_in_Northern_India_Ron_Barrett.jsonl",
+      "size_kb": 1542.7
+    },
+    {
+      "book": "Analytical_summary_of_yoga_sutras",
+      "chunks": 446,
+      "file": "Analytical_summary_of_yoga_sutras.jsonl",
+      "size_kb": 1437.6
+    },
+    {
+      "book": "Medicina-Ayurveda-Yoga-Terapia_Gregory_Fields",
+      "chunks": 408,
+      "file": "Medicina-Ayurveda-Yoga-Terapia_Gregory_Fields.jsonl",
+      "size_kb": 1421.1
+    },
+    {
+      "book": "Religious_Therapeutics_Body_&_Health_in_Yoga_Auyurveda_&Tantra_Gregory_Fields_P._U.P._Samskrita",
+      "chunks": 408,
+      "file": "Religious_Therapeutics_Body_&_Health_in_Yoga_Auyurveda_&Tantra_Gregory_Fields_P._U.P._Samskrita.jsonl",
+      "size_kb": 1498.4
+    },
+    {
+      "book": "An_Essay_onThe_Antiquityof_Hindoo_(Hindu)_Medicene_Royle_J.F._1837",
+      "chunks": 398,
+      "file": "An_Essay_onThe_Antiquityof_Hindoo_(Hindu)_Medicene_Royle_J.F._1837.jsonl",
+      "size_kb": 1240.3
+    },
+    {
+      "book": "sushruta_sharira",
+      "chunks": 386,
+      "file": "sushruta_sharira.jsonl",
+      "size_kb": 819.6
+    },
+    {
+      "book": "Ayurveda_for_dummies",
+      "chunks": 371,
+      "file": "Ayurveda_for_dummies.jsonl",
+      "size_kb": 701.6
+    },
+    {
+      "book": "Surgical_instruments",
+      "chunks": 361,
+      "file": "Surgical_instruments.jsonl",
+      "size_kb": 817.8
+    },
+    {
+      "book": "AFI-VOL-I_PART_B_APPENDICES",
+      "chunks": 359,
+      "file": "AFI-VOL-I_PART_B_APPENDICES.jsonl",
+      "size_kb": 817.0
+    },
+    {
+      "book": "A_Text_Book_Of_Svastha_Vritta_Mangalgowri_Rao_V._Chowkambha",
+      "chunks": 350,
+      "file": "A_Text_Book_Of_Svastha_Vritta_Mangalgowri_Rao_V._Chowkambha.jsonl",
+      "size_kb": 1711.0
+    },
+    {
+      "book": "Sushruta_Samhita_Vol_3",
+      "chunks": 348,
+      "file": "Sushruta_Samhita_Vol_3.jsonl",
+      "size_kb": 1076.0
+    },
+    {
+      "book": "AFI_PART_II_FORMULATIONS",
+      "chunks": 342,
+      "file": "AFI_PART_II_FORMULATIONS.jsonl",
+      "size_kb": 1054.1
+    },
+    {
+      "book": "Sushruta_Samhita",
+      "chunks": 339,
+      "file": "Sushruta_Samhita.jsonl",
+      "size_kb": 2485.5
+    },
+    {
+      "book": "2015.325784.The-Caraka_V6",
+      "chunks": 336,
+      "file": "2015.325784.The-Caraka_V6.jsonl",
+      "size_kb": 1202.4
+    },
+    {
+      "book": "Principles_of_Tibetan_Medicine_Whatit_is_How_it_Works_&_What_it_Can_do_For_You_Tamdin_Sither_Bradley",
+      "chunks": 335,
+      "file": "Principles_of_Tibetan_Medicine_Whatit_is_How_it_Works_&_What_it_Can_do_For_You_Tamdin_Sither_Bradley.jsonl",
+      "size_kb": 996.6
+    },
+    {
+      "book": "Well_Mannered_Medicine_Medical_Ethics_and_Etiquette_in_Classical_Ayurveda_Dagmar_Wujastyk_OUP",
+      "chunks": 321,
+      "file": "Well_Mannered_Medicine_Medical_Ethics_and_Etiquette_in_Classical_Ayurveda_Dagmar_Wujastyk_OUP.jsonl",
+      "size_kb": 1190.6
+    },
+    {
+      "book": "Alchemy_and_Metallic_Medicines_in_Ayurveda_Vaidya_Bhagavan_Dash",
+      "chunks": 320,
+      "file": "Alchemy_and_Metallic_Medicines_in_Ayurveda_Vaidya_Bhagavan_Dash.jsonl",
+      "size_kb": 1161.5
+    },
+    {
+      "book": "Everyday_Ayurveda_–_a_practical_guide_to_healthy_living_-_Ayurveda_UK",
+      "chunks": 312,
+      "file": "Everyday_Ayurveda_–_a_practical_guide_to_healthy_living_-_Ayurveda_UK.jsonl",
+      "size_kb": 782.4
+    },
+    {
+      "book": "Ayurveda-_The_science_of_life",
+      "chunks": 297,
+      "file": "Ayurveda-_The_science_of_life.jsonl",
+      "size_kb": 771.4
+    },
+    {
+      "book": "sivananda-practice-of-ayurveda",
+      "chunks": 279,
+      "file": "sivananda-practice-of-ayurveda.jsonl",
+      "size_kb": 607.4
+    },
+    {
+      "book": "tritiya_sthanam",
+      "chunks": 279,
+      "file": "tritiya_sthanam.jsonl",
+      "size_kb": 1055.6
+    },
+    {
+      "book": "An_Interpretation_Of_Ancient_Hindu_Medicine_Chandra_Chakraberty_1923",
+      "chunks": 271,
+      "file": "An_Interpretation_Of_Ancient_Hindu_Medicine_Chandra_Chakraberty_1923.jsonl",
+      "size_kb": 1390.3
+    },
+    {
+      "book": "HIstoryofAyurvedaEng",
+      "chunks": 270,
+      "file": "HIstoryofAyurvedaEng.jsonl",
+      "size_kb": 577.0
+    },
+    {
+      "book": "Bioactives_and_Traditionalmedicines_for_Cardiovascular_diseases",
+      "chunks": 264,
+      "file": "Bioactives_and_Traditionalmedicines_for_Cardiovascular_diseases.jsonl",
+      "size_kb": 962.2
+    },
+    {
+      "book": "Classical_Ayurvedic_Prescriptions_for_common_diseases",
+      "chunks": 261,
+      "file": "Classical_Ayurvedic_Prescriptions_for_common_diseases.jsonl",
+      "size_kb": 514.3
+    },
+    {
+      "book": "An_Interpretation_Of_Ancient_Hindu_Medicine_Chandra_Chakraberty_2008",
+      "chunks": 255,
+      "file": "An_Interpretation_Of_Ancient_Hindu_Medicine_Chandra_Chakraberty_2008.jsonl",
+      "size_kb": 1315.8
+    },
+    {
+      "book": "Introduction_to_Ayurveda_-_Thakkur_(2ed_1975)",
+      "chunks": 244,
+      "file": "Introduction_to_Ayurveda_-_Thakkur_(2ed_1975).jsonl",
+      "size_kb": 724.9
+    },
+    {
+      "book": "sushruta_sutra",
+      "chunks": 236,
+      "file": "sushruta_sutra.jsonl",
+      "size_kb": 1224.5
+    },
+    {
+      "book": "A_Text_Book_of_Sharira-Kriya_Vijnan_Part_II_-_Ranade_(2009)",
+      "chunks": 221,
+      "file": "A_Text_Book_of_Sharira-Kriya_Vijnan_Part_II_-_Ranade_(2009).jsonl",
+      "size_kb": 556.0
+    },
+    {
+      "book": "Remarks_on_common_medicinal_plants_in_india",
+      "chunks": 205,
+      "file": "Remarks_on_common_medicinal_plants_in_india.jsonl",
+      "size_kb": 548.5
+    },
+    {
+      "book": "insert_asanas",
+      "chunks": 195,
+      "file": "insert_asanas.jsonl",
+      "size_kb": 150.9
+    },
+    {
+      "book": "Siddha_Pharmacopoeia_of_IndiaAPPENDICES_1-4",
+      "chunks": 184,
+      "file": "Siddha_Pharmacopoeia_of_IndiaAPPENDICES_1-4.jsonl",
+      "size_kb": 591.7
+    },
+    {
+      "book": "The_Magic_of_Ayurveda",
+      "chunks": 177,
+      "file": "The_Magic_of_Ayurveda.jsonl",
+      "size_kb": 675.9
+    },
+    {
+      "book": "The_study_of_Patanjali",
+      "chunks": 160,
+      "file": "The_study_of_Patanjali.jsonl",
+      "size_kb": 465.5
+    },
+    {
+      "book": "HATHA_Yoga_Simplified",
+      "chunks": 152,
+      "file": "HATHA_Yoga_Simplified.jsonl",
+      "size_kb": 316.5
+    },
+    {
+      "book": "pancha-karma",
+      "chunks": 143,
+      "file": "pancha-karma.jsonl",
+      "size_kb": 329.7
+    },
+    {
+      "book": "Ayurveda_-_The_science_of_self-healing",
+      "chunks": 140,
+      "file": "Ayurveda_-_The_science_of_self-healing.jsonl",
+      "size_kb": 332.0
+    },
+    {
+      "book": "APPENDICES_PART_II_PART_B",
+      "chunks": 137,
+      "file": "APPENDICES_PART_II_PART_B.jsonl",
+      "size_kb": 316.3
+    },
+    {
+      "book": "food-guidelines",
+      "chunks": 132,
+      "file": "food-guidelines.jsonl",
+      "size_kb": 179.5
+    },
+    {
+      "book": "asana_recommendations",
+      "chunks": 122,
+      "file": "asana_recommendations.jsonl",
+      "size_kb": 273.3
+    },
+    {
+      "book": "A_Comprehensive_Study_of_Ayurveda_Traditional_Chinese_Medicine",
+      "chunks": 118,
+      "file": "A_Comprehensive_Study_of_Ayurveda_Traditional_Chinese_Medicine.jsonl",
+      "size_kb": 269.5
+    },
+    {
+      "book": "A_Short_History_of_Aryan_Medical_Science_Bhagavat_Sinh_Jee_1896",
+      "chunks": 114,
+      "file": "A_Short_History_of_Aryan_Medical_Science_Bhagavat_Sinh_Jee_1896.jsonl",
+      "size_kb": 440.5
+    },
+    {
+      "book": "storyofayurveda00meno",
+      "chunks": 100,
+      "file": "storyofayurveda00meno.jsonl",
+      "size_kb": 319.1
+    },
+    {
+      "book": "Ayurveda-_Hindu_system_of_medicine",
+      "chunks": 96,
+      "file": "Ayurveda-_Hindu_system_of_medicine.jsonl",
+      "size_kb": 179.2
+    },
+    {
+      "book": "prathama_sthanam",
+      "chunks": 95,
+      "file": "prathama_sthanam.jsonl",
+      "size_kb": 351.4
+    },
+    {
+      "book": "Chinese_Alchemy_Annotated_Bibliography_of_Works_in_Western_Languages_Fabrizio_Pregadio",
+      "chunks": 94,
+      "file": "Chinese_Alchemy_Annotated_Bibliography_of_Works_in_Western_Languages_Fabrizio_Pregadio.jsonl",
+      "size_kb": 294.0
+    },
+    {
+      "book": "The_indian_operation_for_coucing_cataract",
+      "chunks": 94,
+      "file": "The_indian_operation_for_coucing_cataract.jsonl",
+      "size_kb": 264.1
+    },
+    {
+      "book": "Ayurveda,_A_study_of_Eastern_Philosophy_of_Medicine_Kavita_Patel",
+      "chunks": 89,
+      "file": "Ayurveda,_A_study_of_Eastern_Philosophy_of_Medicine_Kavita_Patel.jsonl",
+      "size_kb": 235.8
+    },
+    {
+      "book": "Hidden_Secret_of_Ayurveda_-_Svoboda,_Robert",
+      "chunks": 83,
+      "file": "Hidden_Secret_of_Ayurveda_-_Svoboda,_Robert.jsonl",
+      "size_kb": 161.6
+    },
+    {
+      "book": "AFI_-_COMMON-_SINGLE_DRUG_FORMULARY",
+      "chunks": 78,
+      "file": "AFI_-_COMMON-_SINGLE_DRUG_FORMULARY.jsonl",
+      "size_kb": 194.2
+    },
+    {
+      "book": "The_Science_of_Breath",
+      "chunks": 70,
+      "file": "The_Science_of_Breath.jsonl",
+      "size_kb": 178.4
+    },
+    {
+      "book": "AYUSH-Essential_Ayurveda_Medicines",
+      "chunks": 65,
+      "file": "AYUSH-Essential_Ayurveda_Medicines.jsonl",
+      "size_kb": 151.7
+    },
+    {
+      "book": "Ayurveda-Ancient_wisdom_for_modern_lifestyle",
+      "chunks": 61,
+      "file": "Ayurveda-Ancient_wisdom_for_modern_lifestyle.jsonl",
+      "size_kb": 112.3
+    },
+    {
+      "book": "Vriksha_Ayurveda_Subhashini_Sridhar_et_al_(CIKS)",
+      "chunks": 56,
+      "file": "Vriksha_Ayurveda_Subhashini_Sridhar_et_al_(CIKS).jsonl",
+      "size_kb": 186.0
+    },
+    {
+      "book": "Dhatuparinama_Ayurvedic_Concepts_of_Metabolism_Abhilash_M",
+      "chunks": 55,
+      "file": "Dhatuparinama_Ayurvedic_Concepts_of_Metabolism_Abhilash_M.jsonl",
+      "size_kb": 170.5
+    },
+    {
+      "book": "COMMON_APPENDICES_-_Diseases_AYUSH",
+      "chunks": 45,
+      "file": "COMMON_APPENDICES_-_Diseases_AYUSH.jsonl",
+      "size_kb": 104.4
+    },
+    {
+      "book": "Text_book_of_Ayurveda",
+      "chunks": 34,
+      "file": "Text_book_of_Ayurveda.jsonl",
+      "size_kb": 71.5
+    },
+    {
+      "book": "dvitiya_sthanam",
+      "chunks": 33,
+      "file": "dvitiya_sthanam.jsonl",
+      "size_kb": 119.5
+    },
+    {
+      "book": "Sudhruta_Samhita_Vol_1",
+      "chunks": 32,
+      "file": "Sudhruta_Samhita_Vol_1.jsonl",
+      "size_kb": 123.8
+    },
+    {
+      "book": "ravimekalai_75_கோரக்கர்_ரவிமேகலை-75",
+      "chunks": 28,
+      "file": "ravimekalai_75_கோரக்கர்_ரவிமேகலை-75.jsonl",
+      "size_kb": 66.4
+    },
+    {
+      "book": "Ayurved_Mahavir_Namichandra_Pugaliya",
+      "chunks": 26,
+      "file": "Ayurved_Mahavir_Namichandra_Pugaliya.jsonl",
+      "size_kb": 59.3
+    },
+    {
+      "book": "pathirakiriyar_பத்திரகிரியார்_மெய்ஞ்ஞானப்_புலம்பல்_சித்தர்_பாடல்கள்",
+      "chunks": 20,
+      "file": "pathirakiriyar_பத்திரகிரியார்_மெய்ஞ்ஞானப்_புலம்பல்_சித்தர்_பாடல்கள்.jsonl",
+      "size_kb": 63.5
+    },
+    {
+      "book": "A_Short_Account_of_the_Antiquity_of_Hindu_Medicine_David_Muthu_C",
+      "chunks": 19,
+      "file": "A_Short_Account_of_the_Antiquity_of_Hindu_Medicine_David_Muthu_C.jsonl",
+      "size_kb": 73.9
+    },
+    {
+      "book": "Integrating_Ayurveda_with_modern_medicine",
+      "chunks": 14,
+      "file": "Integrating_Ayurveda_with_modern_medicine.jsonl",
+      "size_kb": 28.6
+    },
+    {
+      "book": "pancamam_kalpa_sthanam",
+      "chunks": 14,
+      "file": "pancamam_kalpa_sthanam.jsonl",
+      "size_kb": 50.8
+    },
+    {
+      "book": "A_Small_Guide_to_Panchakarma_-_MAM",
+      "chunks": 12,
+      "file": "A_Small_Guide_to_Panchakarma_-_MAM.jsonl",
+      "size_kb": 40.3
+    },
+    {
+      "book": "shashtham_sharira_sthanam",
+      "chunks": 12,
+      "file": "shashtham_sharira_sthanam.jsonl",
+      "size_kb": 37.4
+    },
+    {
+      "book": "Susruta_Samhita_-_A_Scientific_Synopsis_-_Priyadaranjan_Ray,_Hirendranath_Gupta,_Mira_Roy",
+      "chunks": 8,
+      "file": "Susruta_Samhita_-_A_Scientific_Synopsis_-_Priyadaranjan_Ray,_Hirendranath_Gupta,_Mira_Roy.jsonl",
+      "size_kb": 34.4
+    },
+    {
+      "book": "caturtha_sthanam",
+      "chunks": 8,
+      "file": "caturtha_sthanam.jsonl",
+      "size_kb": 26.0
+    },
+    {
+      "book": "kashyapa02vimana",
+      "chunks": 8,
+      "file": "kashyapa02vimana.jsonl",
+      "size_kb": 33.2
+    },
+    {
+      "book": "The-Sushruta-Samhita--Vol3_English",
+      "chunks": 7,
+      "file": "The-Sushruta-Samhita--Vol3_English.jsonl",
+      "size_kb": 4.2
+    },
+    {
+      "book": "BIBLIOGRAPHY",
+      "chunks": 5,
+      "file": "BIBLIOGRAPHY.jsonl",
+      "size_kb": 11.7
+    },
+    {
+      "book": "Nandheesar_ashtama_siddhu_05._நந்தீசர்_அட்டமா_சித்து-5",
+      "chunks": 4,
+      "file": "Nandheesar_ashtama_siddhu_05._நந்தீசர்_அட்டமா_சித்து-5.jsonl",
+      "size_kb": 26.9
+    },
+    {
+      "book": "Nadi_Pariksha_With_Hinidi_Tika_Venkateswara_Steam_Press",
+      "chunks": 1,
+      "file": "Nadi_Pariksha_With_Hinidi_Tika_Venkateswara_Steam_Press.jsonl",
+      "size_kb": 9.9
+    },
+    {
+      "book": "kuthambaisiththar_குதம்பை_சித்தர்_பாடல்கள்",
+      "chunks": 1,
+      "file": "kuthambaisiththar_குதம்பை_சித்தர்_பாடல்கள்.jsonl",
+      "size_kb": 3.0
+    },
+    {
+      "book": "paampaatti_பாம்பாட்டி_சித்தர்_பாடல்கள்",
+      "chunks": 1,
+      "file": "paampaatti_பாம்பாட்டி_சித்தர்_பாடல்கள்.jsonl",
+      "size_kb": 3.1
+    },
+    {
+      "book": "sivavaakkiyam_சிவவாக்கியம்",
+      "chunks": 1,
+      "file": "sivavaakkiyam_சிவவாக்கியம்.jsonl",
+      "size_kb": 3.1
+    }
+  ]
+}
