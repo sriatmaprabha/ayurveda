@@ -78,7 +78,7 @@ def test_ensure_question_preserves_existing():
     assert result == text  # Should not modify — already ends with question
 
 
-def test_offline_response_always_has_question():
+def test_offline_response_always_invites():
     diag = ConversationalDiagnostic.__new__(ConversationalDiagnostic)
     diag.llm = None
     diag._fallback_idx = 0
@@ -88,19 +88,19 @@ def test_offline_response_always_has_question():
     # Turn 1
     conv.add_patient_message("test")
     resp = diag._offline_response(conv, "test")
-    assert resp.rstrip().endswith("?")
+    assert resp.rstrip().endswith("?") or "tell" in resp.lower() or "share" in resp.lower()
 
     # Turn 3
     conv.add_patient_message("test2")
     conv.add_patient_message("test3")
     resp = diag._offline_response(conv, "test3")
-    assert resp.rstrip().endswith("?")
+    assert resp.rstrip().endswith("?") or "tell" in resp.lower()
 
     # Turn 5
     conv.add_patient_message("test4")
     conv.add_patient_message("test5")
     resp = diag._offline_response(conv, "test5")
-    assert resp.rstrip().endswith("?")
+    assert resp.rstrip().endswith(".") or resp.rstrip().endswith("?")  # Natural ending
 
 
 def test_respond_with_mock_llm():

@@ -88,16 +88,19 @@ def _build_protocol_context(message: str, dosha: str) -> str:
 
 
 def _get_prakriti_question_text(profile: PrakritiProfile) -> str:
-    """Get the next prakriti question to append to the response."""
+    """Get the next prakriti question -- woven naturally, not as a quiz."""
     questions = get_next_questions(profile, count=1)
     if not questions:
         return ""
 
     q = questions[0]
     profile.questions_asked.append(q["id"])
+    opts = q["options"]
     return (
-        "\n\nTo better personalize your treatment, let me understand your constitution:\n\n"
-        + format_question_for_chat(q)
+        f"\n\nTo see your design more clearly -- {q['question'].lower()}\n"
+        f"  A) {opts['a']['text']}\n"
+        f"  B) {opts['b']['text']}\n"
+        f"  C) {opts['c']['text']}"
     )
 
 
@@ -163,15 +166,8 @@ async def start_chat():
         "prakriti": prakriti,
     }
 
-    opening = (
-        "Nithyanandam! I am your Ayurvedic diagnostic assistant. I will help identify "
-        "your dosha imbalance and guide you toward a personalized treatment plan "
-        "based on classical Ayurvedic texts.\n\n"
-        "I'll ask you a series of questions to understand your condition. "
-        "You can describe your symptoms, share how you're feeling, or even "
-        "describe what your tongue, skin, or nails look like.\n\n"
-        "To begin -- what is your primary health concern or symptom that brought you here today?"
-    )
+    from src.generation.prompts import OPENING_MESSAGE
+    opening = OPENING_MESSAGE
 
     conversation.add_vaidya_response(opening)
 
@@ -212,15 +208,19 @@ async def send_message(request: ChatRequest):
     conversation.pitta_score = prakriti.pitta
     conversation.kapha_score = prakriti.kapha
 
-    # Get fixed asana protocols (deterministic, not vector search)
+    # Get fixed asana protocols (limit for GPU memory)
     protocol_context = _build_protocol_context(request.message, prakriti.dominant)
+    if protocol_context and len(protocol_context) > 500:
+        protocol_context = protocol_context[:500] + "..."
 
-    # Get knowledge base context (for medical/textbook info only)
+    # Get knowledge base context (top_k=2 for GPU memory)
     context = ""
     sources = []
     try:
-        retrieval = engine.answer_with_sources(request.message)
+        retrieval = engine.answer_with_sources(request.message, top_k=2)
         context = retrieval["context"]
+        if len(context) > 1500:
+            context = context[:1500] + "..."
         sources = [{"file": s["file"], "section": s["section"], "score": s["score"]} for s in retrieval["sources"]]
     except Exception:
         context = ""
@@ -289,14 +289,20 @@ async def stream_message(request: ChatRequest):
     conversation.pitta_score = prakriti.pitta
     conversation.kapha_score = prakriti.kapha
 
-    # Get fixed asana protocols
+    # Get fixed asana protocols (limit to 1 for GPU memory)
     protocol_context = _build_protocol_context(request.message, prakriti.dominant)
+    # Trim protocol context to max 500 chars
+    if protocol_context and len(protocol_context) > 500:
+        protocol_context = protocol_context[:500] + "..."
 
-    # Get KB context
+    # Get KB context (top_k=2 to fit GPU)
     context = ""
     try:
-        retrieval = engine.answer_with_sources(request.message, top_k=3)
+        retrieval = engine.answer_with_sources(request.message, top_k=2)
         context = retrieval["context"]
+        # Hard cap context to 1500 chars
+        if len(context) > 1500:
+            context = context[:1500] + "..."
     except Exception:
         context = ""
 
@@ -311,11 +317,18 @@ async def stream_message(request: ChatRequest):
 
     conversation.add_patient_message(request.message)
 
-    # Build prompt with combined context (no separate asana_context — it's in combined_context now)
+    # Trim conversation history to last 4 turns to fit GPU memory
+    recent_turns = conversation.turns[-4:] if len(conversation.turns) > 4 else conversation.turns
+    history_text = "\n\n".join(
+        f"{'Patient' if t.role == 'patient' else 'Vaidya'}: {t.message[:200]}"
+        for t in recent_turns
+    )
+
+    # Build prompt
     prompt = DIAGNOSTIC_QUERY_TEMPLATE.format(
         context=combined_context if combined_context else "No specific context retrieved.",
-        asana_context="Asana protocols are included in the context above.",
-        conversation_history=conversation.history_text,
+        asana_context="Asana protocols are included in the context above." if protocol_context else "No protocols.",
+        conversation_history=history_text,
         message=request.message,
         vata_score=conversation.vata_score,
         pitta_score=conversation.pitta_score,
@@ -328,7 +341,7 @@ async def stream_message(request: ChatRequest):
         base_url=os.getenv("LLM_BASE_URL", "http://localhost:11434/v1"),
         model=os.getenv("LLM_MODEL", "llama3"),
         api_key=os.getenv("LLM_API_KEY", "ollama"),
-        max_tokens=512,
+        max_tokens=384,
     )
     client = LLMClient(config)
 

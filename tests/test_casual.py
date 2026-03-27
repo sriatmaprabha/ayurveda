@@ -61,10 +61,14 @@ def test_medical_queries_not_casual():
     assert classify_casual("How to balance Pitta?") is None
 
 
-def test_all_casual_responses_end_with_question():
-    """Every casual response should end with a question to keep conversation going."""
+def test_all_casual_responses_invite_engagement():
+    """Every casual response should invite the user to continue (question or invitation)."""
     for key, response in CASUAL_RESPONSES.items():
-        assert response.rstrip().endswith("?"), f"Casual response '{key}' doesn't end with a question"
+        last_line = response.strip().split("\n")[-1].strip()
+        # Must end with ? or contain an invitation (Share, Tell, Return, etc.)
+        has_question = last_line.endswith("?")
+        has_invitation = any(w in last_line for w in ["Share", "Tell", "Return", "share", "tell", "observe"])
+        assert has_question or has_invitation, f"Casual response '{key}' doesn't invite engagement"
 
 
 def test_casual_responses_all_categories_exist():

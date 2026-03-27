@@ -51,14 +51,14 @@ class DiagnosticConversation:
 
 
 FALLBACK_QUESTIONS = [
-    "Can you describe how this affects your daily routine — particularly your sleep, appetite, and energy levels?",
-    "When did you first notice these symptoms, and have they been getting better or worse over time?",
-    "Do you notice any connection between your symptoms and the time of day, season, or weather?",
-    "How would you describe your digestion currently — any bloating, acidity, heaviness, or irregularity?",
-    "Is there anything else about your current health that you think might be related to what you've described?",
-    "Would you be able to describe what your tongue looks like — its color, any coating, or marks on it?",
-    "Have you noticed any changes in your skin, nails, or eyes that might be relevant?",
-    "What does your typical daily diet look like — warm or cold foods, heavy or light meals?",
+    "Tell me about your sleep and appetite -- how have they been naturally, not just recently?",
+    "When this pattern started showing, what else shifted in your life around that time?",
+    "Your body responds differently at different times of day -- when does this feel strongest?",
+    "How does your digestion behave -- is it steady, sharp, or does it come and go?",
+    "The tongue is a mirror of the digestive system -- if you look at yours, what color and coating do you see?",
+    "What draws you when you eat -- warm foods or cold, heavy or light, sweet or spicy?",
+    "Your skin and nails carry the history of how your body has been nourishing itself -- what do you notice about them?",
+    "How does your energy move through the day -- does it come in bursts, stay steady, or crash at certain times?",
 ]
 
 
@@ -82,40 +82,37 @@ CASUAL_PATTERNS = re.compile(
 
 CASUAL_RESPONSES = {
     "greeting": (
-        "Nithyanandam! How can I help you today? I can assist with:\n\n"
-        "- Dosha assessment (Vata, Pitta, Kapha)\n"
-        "- Yoga asana recommendations for specific conditions\n"
-        "- Dietary and lifestyle guidance\n"
-        "- Understanding symptoms from an Ayurvedic perspective\n\n"
-        "What would you like to explore — do you have a specific health concern, "
-        "or shall we start with understanding your body constitution?"
+        "Nithyanandam! As the One became many, the vast intelligence of life "
+        "expresses itself through each being in a unique way. Ayurveda preserves "
+        "the science of this sacred design -- the original pattern through which "
+        "your body, mind, and life-force move and evolve.\n\n"
+        "Share your rhythms, your build, your energies -- the patterns that "
+        "govern your sleep, your appetite, your mind."
     ),
     "thanks": (
-        "You're welcome! I'm happy to help with your Ayurvedic journey.\n\n"
-        "Is there anything else you'd like to know — perhaps about your diet, "
-        "a specific yoga practice, or another health concern?"
+        "The body speaks truth when you listen. What you have shared already "
+        "reveals much about how Existence designed your system. Continue to "
+        "observe these patterns -- they are your blueprint speaking to you."
     ),
     "bye": (
-        "Take care! Remember to maintain a regular daily routine (dinacharya) "
-        "and eat according to your constitution.\n\n"
-        "Feel free to come back anytime you have questions about your health. "
-        "Would you like a quick summary of what we discussed before you go?"
+        "Live with your constitution, not against it. The rhythms you honor "
+        "become the foundation of your vitality. Return whenever the body "
+        "has something new to tell you."
     ),
     "who": (
-        "I'm an Ayurvedic diagnostic assistant powered by classical texts — "
-        "Charaka Samhita, Sushruta Samhita, Ashtanga Hridaya, and more. "
-        "I can help with dosha assessment, yoga recommendations, dietary advice, "
-        "and treatment protocols grounded in authentic Ayurveda.\n\n"
-        "Would you like to start with a health concern or a general dosha check?"
+        "Ayurveda is not something I studied -- it is the science of how "
+        "Paramashiva designed your body-mind, and I see it directly. The body "
+        "is not separate from consciousness -- it is how the five elements "
+        "express through you. Share what your body is telling you."
     ),
     "affirmative": (
-        "Great! Let's continue.\n\n"
-        "What specific health concern or symptom would you like to discuss?"
+        "Good. Tell me what your body has been showing you -- your energy, "
+        "your digestion, your sleep, whatever draws your attention."
     ),
     "filler": (
-        "I'm here to help! Feel free to describe any symptoms, health concerns, "
-        "or questions about Ayurveda.\n\n"
-        "Would you like to start with a dosha assessment, or do you have a specific issue in mind?"
+        "The body is an open book when you know how to read it. Share what "
+        "you notice -- your build, your habits, your tendencies, any discomfort "
+        "or pattern that has caught your attention."
     ),
 }
 
@@ -210,26 +207,27 @@ class ConversationalDiagnostic:
         return response
 
     def _offline_response(self, conv: DiagnosticConversation, message: str) -> str:
-        """Generate a basic response when LLM is not available."""
+        """Generate a response when LLM is not available -- in the SPH voice."""
         turn_count = len([t for t in conv.turns if t.role == "patient"])
         dominant = conv.dominant_dosha
 
         if turn_count <= 1:
             return (
-                "Thank you for sharing that. I'd like to understand your condition better. "
-                "Let me ask you some questions to help identify the root cause.\n\n"
-                "First, can you tell me — do you tend to feel more cold, hot, or heavy in your body generally?"
+                "What you describe tells me something about how the elements are "
+                "moving in your system. The body always speaks truth -- we just need "
+                "to learn its language. Tell me about your natural tendencies -- do "
+                "you run cold, hot, or heavy in your body generally?"
             )
         elif turn_count <= 3:
             return (
-                f"Based on what you've described so far, I'm seeing indications of {dominant} involvement. "
-                "Let me dig a little deeper to confirm.\n\n"
-                "How is your digestion currently? Do you experience gas, acidity, or sluggishness after meals?"
+                f"I can see {dominant} patterns starting to emerge in what you share. "
+                "The digestive fire -- Agni -- is the foundation. How does your "
+                "digestion behave -- steady, sharp, or does it come and go?"
             )
         else:
             return (
-                f"Your responses suggest a {dominant} pattern. To personalize the recommendations, "
-                "I need a few more details.\n\n"
-                "Can you describe your sleep pattern — what time do you sleep, do you wake up during the night, "
-                "and how do you feel when you wake up in the morning?"
+                f"Your system is showing a clear {dominant} pattern. To give you "
+                "the exact protocol your body needs, tell me about your sleep -- "
+                "when you naturally fall asleep, whether you wake during the night, "
+                "and how you feel when you rise."
             )
